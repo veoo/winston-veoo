@@ -1,7 +1,7 @@
 util = require 'util'
 winston = require 'winston'
 mongoose = require 'mongoose'
-settings = require './settings'
+settings = require './settings' # needs to be set to relative path
 winston.remove(winston.transports.Console)
 ErrorLevels = require './ErrorLevels'
 winston.add(winston.transports.Console, {timestamp: true, level: 'debug', colorize: true})
