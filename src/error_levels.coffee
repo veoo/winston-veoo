@@ -1,4 +1,4 @@
-custom_ErrorLevels = {
+module.exports = {
   levels: {
     silly: 0
     debug: 1
@@ -7,7 +7,7 @@ custom_ErrorLevels = {
     warn: 4
     error: 5
     fatal: 6
-  }
+  },
   colors: {
     silly: 'green'
     debug: 'blue'
@@ -19,4 +19,4 @@ custom_ErrorLevels = {
   }
 }
 
-exports.ErrorLevels = custom_ErrorLevels
+# exports.ErrorLevels = custom_ErrorLevels
