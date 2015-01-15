@@ -1,6 +1,8 @@
 {
   "name": "winston-veoo",
   "version": "0.1.0",
+  "description": "Reusable mini module for logging and error functionality within veoo node apps",
+  "author": "Rashid & Alastair",
   "dependencies": {
     "mongoose": "2.7.4",
     "redis": "0.8.3",
@@ -9,5 +11,10 @@
     "mocha": "1.16.2",
     "coffee-script": "^1.7.1",
     "loggly": "^1.0.4"
+  }, 
+  "main": "./lib/winston-veoo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/veoo/winston-veoo.git"
   }
 }
