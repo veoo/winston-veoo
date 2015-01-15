@@ -6,7 +6,6 @@ RedisClient = require('../../../app/models/redis_client').RedisClient
 redisClient = new RedisClient().client
 winston.remove(winston.transports.Console)
 ErrorLevels = require './error_levels'
-console.log("Inspecting ErrorLevels", ErrorLevels)
 winston.add(winston.transports.Console, {timestamp: true, level: 'debug', colorize: true})
 winston.setLevels(ErrorLevels.levels)
 winston.addColors(ErrorLevels.colors)
