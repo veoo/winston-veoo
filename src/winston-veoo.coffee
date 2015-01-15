@@ -1,7 +1,7 @@
 util = require 'util'
 winston = require 'winston'
 mongoose = require 'mongoose'
-settings = require '../../src/settings' # needs to be set to relative path
+settings = require '../../../src/settings' # needs to be set to relative path
 redisClient = new RedisClient().client
 winston.remove(winston.transports.Console)
 ErrorLevels = require './ErrorLevels'

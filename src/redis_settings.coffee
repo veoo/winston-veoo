@@ -1,5 +1,5 @@
 Url      = require 'url'
-redis_settings = require '../../src/initializers/redis_settings' # has to be manually set to correct path
+redis_settings = require '../../../src/initializers/redis_settings' # has to be manually set to correct path
 Redis    = require 'redis'
 
 class RedisClient
