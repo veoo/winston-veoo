@@ -14,7 +14,7 @@ module.exports = {
     verbose: 'purple'
     info: 'magenta'
     warn: 'yellow'
-    error: 'orange'
+    error: 'red'
     fatal: 'red'
   }
 }
