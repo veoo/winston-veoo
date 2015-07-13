@@ -4,7 +4,7 @@ mongoose = require 'mongoose'
 settings = require '../../../app/settings' # needs to be set to relative path
 winston.remove(winston.transports.Console)
 ErrorLevels = require './error_levels'
-winston.add(winston.transports.Console, {timestamp: true, level: 'debug', colorize: true})
+winston.add(winston.transports.Console, {timestamp: true, colorize: true})
 winston.setLevels(ErrorLevels.levels)
 winston.addColors(ErrorLevels.colors)
 
