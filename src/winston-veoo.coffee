@@ -56,18 +56,18 @@ settings.mongo_log_url((err, mongo_log_url) ->
           console.log("Error accessing Redis for log-levels!")
           callback(true, "Redis log level error.")
         else
-          console.log('before the conditions');
+          console.log 'before the conditions'
           if resp is 'info' and level is 'debug'
-            console.log('inside the first condition');
+            console.log 'first condition'
             # do nothing
             callback(null, 'dropped')
           else if level is 'fatal'
-            console.log('inside the second condition');
+            console.log 'second fatal condition'
             # write to fatalerrors
             fatal_entry = new MongooseFatalEntry({application_name: @application_name, message: msg, stack: meta, timestamp: Date.now() })
             fatal_entry.save callback
           else
-            console.log('inside the third condition');
+            console.log 'third else condition'
             log_entry = new MongooseLogEntry({application_name: @application_name, level: level, message: msg, meta: meta, timestamp: Date.now()})
             log_entry.save callback
       )
