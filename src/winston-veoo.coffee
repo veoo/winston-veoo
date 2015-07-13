@@ -42,7 +42,7 @@ settings.mongo_log_url((err, mongo_log_url) ->
     MongooseLogger = winston.transports.MongooseLogger = (options) ->
       @name = 'MongooseLogger'
       @application_name = options.application_name || 'default'
-      # @level = options.level
+      @level = options.level || 'debug'
   
 
 
