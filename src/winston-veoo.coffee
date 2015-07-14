@@ -51,24 +51,20 @@ settings.mongo_log_url((err, mongo_log_url) ->
     # Store this message and metadata, maybe use some custom logic
     # then callback indicating success.
     MongooseLogger.prototype.log = (level, msg, meta, callback) ->
-      console.log "application_name - #{@application_name}"
       redisClient.get("log_level:#{@application_name}", (err, resp) =>
         if err 
           console.log("Error accessing Redis for log-levels!")
           callback(true, "Redis log level error.")
         else
-          console.log "resp = #{resp} and level = #{level}"
           if resp is 'info' and level is 'debug'
             console.log 'first condition'
             # do nothing
             callback(null, 'dropped')
           else if level is 'fatal'
-            console.log 'second fatal condition'
             # write to fatalerrors
             fatal_entry = new MongooseFatalEntry({application_name: @application_name, message: msg, stack: meta, timestamp: Date.now() })
             fatal_entry.save callback
           else
-            console.log 'third else condition'
             log_entry = new MongooseLogEntry({application_name: @application_name, level: level, message: msg, meta: meta, timestamp: Date.now()})
             log_entry.save callback
       )
