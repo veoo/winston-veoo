@@ -57,7 +57,6 @@ settings.mongo_log_url((err, mongo_log_url) ->
           callback(true, "Redis log level error.")
         else
           if resp is 'info' and level is 'debug'
-            console.log 'first condition'
             # do nothing
             callback(null, 'dropped')
           else if level is 'fatal'
