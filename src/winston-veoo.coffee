@@ -8,7 +8,6 @@ winston.add(winston.transports.Console, {timestamp: true, level: 'debug', colori
 winston.setLevels(ErrorLevels.levels)
 winston.addColors(ErrorLevels.colors)
 
-
 Schema = mongoose.Schema
 
 settings.mongo_log_url((err, mongo_log_url, connection_options) ->
@@ -22,6 +21,7 @@ settings.mongo_log_url((err, mongo_log_url, connection_options) ->
         console.log("could not connect to DB: " + err)
     )
 
+    # This is a log entry.
     LogEntry = new Schema(
       application_name: {type: String, index:true, required: true}
       level: {type: String, index:true}
