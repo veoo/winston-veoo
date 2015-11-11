@@ -11,11 +11,13 @@ winston.addColors(ErrorLevels.colors)
 
 Schema = mongoose.Schema
 
-settings.mongo_log_url((err, mongo_log_url) ->
+settings.mongo_log_url((err, mongo_log_url, connection_options) ->
   if err
-    console.log("Could not connect to redis for dynamic mongo info #{err}, #{mongo_log_url}")
+    console.log("Could not connect to redis for dynamic mongo info #{err}, #{mongo_log_url}, #{connection_options}")
   else
-    db = mongoose.createConnection(mongo_log_url, {db:{safe:false}}, (err) ->
+    connection_options ?= {}
+    connection_options.db = {safe: false}
+    db = mongoose.createConnection(mongo_log_url, connection_options, (err) ->
       if err
         console.log("could not connect to DB: " + err)
     )
