@@ -15,7 +15,6 @@ settings.mongo_log_url((err, mongo_log_url, connection_options) ->
     console.log("Could not connect to redis for dynamic mongo info #{err}, #{mongo_log_url}, #{connection_options}")
   else
     connection_options ?= {}
-    connection_options.db = {safe: false}
     db = mongoose.createConnection(mongo_log_url, connection_options, (err) ->
       if err
         console.log("could not connect to DB: " + err)

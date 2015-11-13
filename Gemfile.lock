@@ -49,6 +49,3 @@ PLATFORMS
 DEPENDENCIES
   guard
   guard-coffeescript
-
-BUNDLED WITH
-   1.10.6
