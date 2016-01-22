@@ -64,7 +64,9 @@ settings.mongo_log_url((err, mongo_log_url, connection_options) ->
             # write to fatalerrors
             fatal_entry = new MongooseFatalEntry({application_name: @application_name, message: msg, stack: meta, timestamp: Date.now() })
             fatal_entry.save callback
-          else
+          else if level is 'error'
+            callback(null, 'dropped')
+          else 
             log_entry = new MongooseLogEntry({application_name: @application_name, level: level, message: msg, meta: meta, timestamp: Date.now()})
             log_entry.save callback
       )
