@@ -60,15 +60,18 @@ settings.mongo_log_url((err, mongo_log_url, connection_options) ->
           if resp is 'info' and level is 'debug'
             # do nothing
             callback(null, 'dropped')
-          else if level is 'fatal'
+          else if resp is 'info' and level is 'error'
+            log_entry = new MongooseLogEntry({application_name: @application_name, level: level, message: msg, meta: meta, timestamp: Date.now()})
+            log_entry.save callback
+          else if resp is 'error' and level is 'error' or level is 'fatal'
+            log_entry = new MongooseLogEntry({application_name: @application_name, level: level, message: msg, meta: meta, timestamp: Date.now()})
+            log_entry.save callback
+          else if resp is 'fatal' and level is 'fatal'
             # write to fatalerrors
             fatal_entry = new MongooseFatalEntry({application_name: @application_name, message: msg, stack: meta, timestamp: Date.now() })
             fatal_entry.save callback
-          else if level is 'error'
-            callback(null, 'dropped')
           else 
-            log_entry = new MongooseLogEntry({application_name: @application_name, level: level, message: msg, meta: meta, timestamp: Date.now()})
-            log_entry.save callback
+            callback(null, 'dropped')
       )
 
 
