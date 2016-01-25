@@ -8,6 +8,8 @@ winston.add(winston.transports.Console, {timestamp: true, level: 'debug', colori
 winston.setLevels(ErrorLevels.levels)
 winston.addColors(ErrorLevels.colors)
 
+log_levels_defn = {debug: 4, info: 3, error: 2, fatal: 1}
+
 Schema = mongoose.Schema
 
 settings.mongo_log_url((err, mongo_log_url, connection_options) ->
@@ -57,20 +59,13 @@ settings.mongo_log_url((err, mongo_log_url, connection_options) ->
           console.log("Error accessing Redis for log-levels!")
           callback(true, "Redis log level error.")
         else
-          if resp is 'info' and level is 'debug'
-            # do nothing
-            callback(null, 'dropped')
-          else if resp is 'info' and level is 'error'
+          log_level_redis = log_levels_defn[resp]
+          log_level_actual = log_levels_defn[level]
+
+          if log_level_actual <= log_level_redis
             log_entry = new MongooseLogEntry({application_name: @application_name, level: level, message: msg, meta: meta, timestamp: Date.now()})
             log_entry.save callback
-          else if resp is 'error' and level is 'error' or level is 'fatal'
-            log_entry = new MongooseLogEntry({application_name: @application_name, level: level, message: msg, meta: meta, timestamp: Date.now()})
-            log_entry.save callback
-          else if resp is 'fatal' and level is 'fatal'
-            # write to fatalerrors
-            fatal_entry = new MongooseFatalEntry({application_name: @application_name, message: msg, stack: meta, timestamp: Date.now() })
-            fatal_entry.save callback
-          else 
+          else
             callback(null, 'dropped')
       )
 
