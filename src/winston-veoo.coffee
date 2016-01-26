@@ -62,7 +62,10 @@ settings.mongo_log_url((err, mongo_log_url, connection_options) ->
           log_level_redis = log_levels_defn[resp]
           log_level_actual = log_levels_defn[level]
 
-          if log_level_actual <= log_level_redis
+          if log_level_actual == 1
+            fatal_entry = new MongooseFatalEntry({application_name: @application_name, message: msg, stack: meta, timestamp: Date.now() })
+            fatal_entry.save callback
+          else if log_level_actual <= log_level_redis
             log_entry = new MongooseLogEntry({application_name: @application_name, level: level, message: msg, meta: meta, timestamp: Date.now()})
             log_entry.save callback
           else
