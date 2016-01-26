@@ -1,6 +1,6 @@
 {
   "name": "winston-veoo",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Reusable mini module for logging and error functionality within veoo node apps",
   "author": "Rashid Omar, Alastair Brunton",
   "dependencies": {
